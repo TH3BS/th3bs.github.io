@@ -1,3 +1,13 @@
 {
-    "version": "2.3"
+    "result": true,
+    "Th3Boss": {
+        "Chaneel_ID": 352568466,
+        "Chaneel_Name": "TΞΛM BФSS",
+        "Chanell_User": "@llDEV1ll",
+        "version": "2.3"
+    },
+    "Developer":{
+        "Dev_1":"@Th3Bs",
+        "Dev_2":"@Blcon"
+}
 }
