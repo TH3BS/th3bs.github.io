@@ -13,5 +13,10 @@
         "Dev_1": "@Th3Bs",
         "Dev_2": "@Blcon",
         "Dev_3": "Not Found"
+    },
+    "Plugins":{
+        "zhrfa.lua":"t",
+        "get.lua":"cc",
+        "Dezener.lua":"gg"
     }
 }
