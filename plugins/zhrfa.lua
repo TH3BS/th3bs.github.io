@@ -1,15 +1,14 @@
 
 local function dBoss(msg)
-
-
 if msg.text then
 if msg.text == "زخرفه" then
-redis:setex(boss..":ZhrfNow"..msg.sender_user_id,500,true)
+redis:setex(boss..":ZhrfNow:"..msg.sender_user_id,500,true)
 sendMsg(msg.chat_id,msg.id,"📑| حسننا , الان يمكنك ارسال الاسم 💯")    
 return false
 end
 
-if redis:get(boss..":ZhrfNow"..msg.sender_user_id) then
+if redis:get(boss..":ZhrfNow:"..msg.sender_user_id) then
+redis:del(boss..":ZhrfNow:"..msg.sender_user_id)
 local End_Text = {
 ' •🌱💚﴿ֆ ❥',
 '🍿﴿ֆ ❥',
@@ -87,7 +86,7 @@ local End_Text = {
 }
 
 
-local Text = " اهلا وسهلا "
+local Text = msg.text
 
 
 local Zhrf = Text:gsub('ا','Ȋ')
@@ -1149,7 +1148,17 @@ sendMsg(msg.chat_id,msg.id,Flter_Markdown(Text_Zhrfa))
 return false
 end
 end
-return{
-Boss = {}
-dboss = dboss
-}
+
+end
+
+
+
+return {
+Boss = {
+"^(.*)$",
+"^(زخرفه)$"
+ },
+ dBoss = dBoss,
+ }
+ 
+ 
