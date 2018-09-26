@@ -886,7 +886,7 @@ local Text_Zhrfa = "1- `"..Zhrf..EmojeS[math.random(#EmojeS)]
 .."`\n7- `"..Zhrf7..EmojeS[math.random(#EmojeS)]
 .."`\n8- `"..Zhrf8..Emoje[math.random(#Emoje)]
 .."`\n9- `"..Zhrf9..Emoje[math.random(#Emoje)]
-Text_Zhrfa = Text_Zhrfa.."`\n\n📑| اضغط ع الاسم ليتم النسخ "
+Text_Zhrfa = Text_Zhrfa.."`\n\n📑| اضغط ع الاسم ليتم النسخ \n✓"
 sendMsg(msg.chat_id,msg.id,Text_Zhrfa)
 return false
 end
