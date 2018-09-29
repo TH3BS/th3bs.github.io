@@ -1,6 +1,6 @@
 
 local function Zhrfa(msg)
-if msg.text then
+if msg.text and msg.type ~= "pv" then
 if msg.text == "زخرفه" then
 redis:setex(boss..":ZhrfNow:"..msg.sender_user_id,500,true)
 sendMsg(msg.chat_id,msg.id,"📑| حسننا , الان يمكنك ارسال الاسم 💯")    
@@ -9,9 +9,11 @@ end
 
 if redis:get(boss..":ZhrfNow:"..msg.sender_user_id) then
 redis:del(boss..":ZhrfNow:"..msg.sender_user_id)
-if UTF8_len(msg.text) > 30 then
-sendMsg(msg.chat_id,msg.id,"📛| لا يمكنك زخرفه اكثر من 30 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
+if UTF8_len(msg.text) > 20 then
+sendMsg(msg.chat_id,msg.id,"📛| لا يمكنك زخرفه اكثر من 20 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
 return false
+elseif msg.text:match("\n") then
+sendMsg(msg.chat_id,msg.id,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
 end
 local EmojeS = {
 ' •🌱💚﴿ֆ ❥',
