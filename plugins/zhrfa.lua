@@ -14,6 +14,7 @@ sendMsg(msg.chat_id,msg.id,"📛| لا يمكنك زخرفه اكثر من 20 ح
 return false
 elseif msg.text:match("\n") then
 sendMsg(msg.chat_id,msg.id,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
+return false
 end
 local EmojeS = {
 ' •🌱💚﴿ֆ ❥',
