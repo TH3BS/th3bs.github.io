@@ -10,10 +10,10 @@ end
 if redis:get(boss..":ZhrfNow:"..msg.sender_user_id_) then
 redis:del(boss..":ZhrfNow:"..msg.sender_user_id_)
 if UTF8_len(msg.text) > 20 then
-sendMsg(msg.chat_id,msg.id,"📛| لا يمكنك زخرفه اكثر من 20 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
+sendMsg(msg.chat_id_,msg.id_,"📛| لا يمكنك زخرفه اكثر من 20 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
 return false
 elseif msg.text:match("\n") then
-sendMsg(msg.chat_id,msg.id,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
+sendMsg(msg.chat_id_,msg.id_,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
 return false
 end
 local EmojeS = {
