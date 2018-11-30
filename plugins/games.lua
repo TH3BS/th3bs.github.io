@@ -6,30 +6,25 @@ if msg.type ~= "pv" then
 
 if MsgText[1] == "تفعيل" and MsgText[2] == "الالعاب" or MsgText[2] == "اللعبه" or MsgText[2] == "اللعبة" then
 if not msg.Admin then return "📛*¦* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
-if redis:get(boss..'lock_geams'..msg.chat_id_) then 
+if not redis:get(boss..'lock_geams'..msg.chat_id_) then 
 return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* الالعاب بالتاكيد تم تفعيلها\n✓" 
 else 
-redis:set(boss..'lock_geams'..msg.chat_id_,true)  
+redis:del(boss..'lock_geams'..msg.chat_id_) 
 return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* تم تفعيل الالعاب \n✓" 
 end 
 end
 
 if MsgText[1] == "تعطيل" and MsgText[2] == "الالعاب" or MsgText[2] == "اللعبه" or MsgText[2] == "اللعبة" then
 if not msg.Admin then return "📛*¦* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
-if not redis:get(boss..'lock_geams'..msg.chat_id_) then 
+if redis:get(boss..'lock_geams'..msg.chat_id_) then 
 return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* الالعاب بالتأكيد معطله\n✓" 
 else
-redis:del(boss..'lock_geams'..msg.chat_id_) 
+redis:set(boss..'lock_geams'..msg.chat_id_,true)  
 return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* تم تعطيل الالعاب\n✓" 
 end   
 end
 
-if not redis:get(boss..'lock_geams'..msg.chat_id_) and not msg.GroupActive then 
-if MsgText[1] ~= "نعم" then
-return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* تم تعطيل الالعاب\n✓"
-end
-return false
-end
+if not redis:get(boss..'lock_geams'..msg.chat_id_) and msg.GroupActive then
 
 if (MsgText[1] == 'اسرع' or MsgText[1] == 'الاسرع') then
 local Smiles = {'🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🍈','🍒','🍑','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥒','🌶','🌽','🥕','🥔','🍠','🥐','🍞','🥖','🥨','🧀','🥚','🍳','🥞','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🥪','🥙','🍼','☕️','🍵','🥤','🍶','🍺','🍻','🏀','⚽️','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🎰','🎮','🎳','🎯','🎲','🎻','🎸','🎺','🥁','🎹','🎼','🎧','🎤','🎬','🎨','🎭','🎪','🎟','🎫','🎗','🏵','🎖','🏆','🥌','🛷','🚕','🚗','🚙','🚌','🚎','🏎','🚓','🚑','🚚','🚛','🚜','🇮🇶','⚔','🛡','🔮','🌡','💣','📌','📍','📓','📗','📂','📅','📪','📫','📬','📭','⏰','📺','🎚','☎️','📡'}
@@ -164,11 +159,16 @@ sendMsg(msg.chat_id_,msg.id_,[[
 🔭¦ روليت » لعبه روليت الشهيره
 ]])
 end
+
+
+end
+
+
 end
 end
 
 local function procces(msg)
-if msg.text then
+if msg.text and not redis:get(boss..'lock_geams'..msg.chat_id_) then
 
 if msg.text == redis:get(boss..':Set_Smile:'..msg.chat_id_) then --// الاسرع
 redis:incrby(boss..':User_Points:'..msg.chat_id_..msg.sender_user_id_,1)  
