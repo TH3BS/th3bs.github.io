@@ -119,13 +119,6 @@ return [[ 👤¦ اهلا بك عزيزي
 🔭¦ روليت » لعبه روليت الشهيره ]]
 end
 
-if MsgText[1] == "اضف" and msg.reply_id and msg.SudoBase then 
-tdcli_function({ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = msg.reply_id },function(arg,data) 
-redis:incrby(boss..':User_Points:'..msg.chat_id_..data.sender_user_id_,MsgText[2])  
-end,nil)
-return "💳| تم تعبئه لك {* "..MsgText[2].." *} نقطه من قبل المطور 💰." 
-end
-
 if MsgText[1] == 'روليت' then
 redis:del(boss..":Number_Add:"..msg.chat_id_..msg.sender_user_id_) 
 redis:del(boss..':List_Rolet:'..msg.chat_id_)  
@@ -232,7 +225,6 @@ return {
 Boss = {
 "^(نعم)$", 
 "^(الاعبين)$", 
-"^(اضف) (%d+)$",
 "^(الالعاب)$", 
 '^(تعطيل) (.+)$',
 '^(تفعيل) (.+)$',
