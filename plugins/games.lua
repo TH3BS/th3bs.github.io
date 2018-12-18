@@ -56,7 +56,7 @@ name = string.gsub(name,'بطريق','🐧')
 name = string.gsub(name,'ضفدع','🐸')
 name = string.gsub(name,'بومه','🦉')
 name = string.gsub(name,'نحله','🐝')
-name = string.gsub(name,'ديج','🐓')
+name = string.gsub(name,'ديك','🐓')
 name = string.gsub(name,'جمل','🐫')
 name = string.gsub(name,'بقره','🐄')
 name = string.gsub(name,'دولفين','🐬')
@@ -98,7 +98,7 @@ end
 if points == "0" then
 return '📛 ¦ للاسف ليس لديك نقاط \n🔖 ¦ للحصول على النقاط العب احد الالعاب الموجوده في `قائمه الالعاب`'
 else
-local Total_Point = points * 10
+local Total_Point = MsgText[2] * 10
 redis:decrby(boss..':User_Points:'..msg.chat_id_..msg.sender_user_id_,MsgText[2])  
 redis:incrby(boss..'msgs:'..msg.sender_user_id_..':'..msg.chat_id_,Total_Point)  
 return "💰¦ تم بيع {* "..MsgText[2].." *} نقطه\n📮| تم زياده {* "..Total_Point.."* } من الرسائل \n📑| اصبحت رسائلك { *"..redis:get(boss..'msgs:'..msg.sender_user_id_..':'..msg.chat_id_).."* } رساله\n🔖| علما لكل نقطه تساوي زياده {* 10 *} رسائل ."
