@@ -2,7 +2,7 @@
 الالعاب ل سورس الزعيم
 --]]
 local function games(msg,MsgText)
-if msg.type ~= "pv" then
+if msg.type ~= "pv" and msg.GroupActive then
 
 if MsgText[1] == "تفعيل" and MsgText[2] == "الالعاب" or MsgText[2] == "اللعبه" or MsgText[2] == "اللعبة" then
 if not msg.Admin then return "📛*¦* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
@@ -24,7 +24,7 @@ return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦*
 end   
 end
 
-if not redis:get(boss..'lock_geams'..msg.chat_id_) and msg.GroupActive then
+if not redis:get(boss..'lock_geams'..msg.chat_id_) then
 
 if (MsgText[1] == 'اسرع' or MsgText[1] == 'الاسرع') then
 local Smiles = {'🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🍈','🍒','🍑','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥒','🌶','🌽','🥕','🥔','🍠','🥐','🍞','🥖','🥨','🧀','🥚','🍳','🥞','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🥪','🥙','🍼','☕️','🍵','🥤','🍶','🍺','🍻','🏀','⚽️','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🎰','🎮','🎳','🎯','🎲','🎻','🎸','🎺','🥁','🎹','🎼','🎧','🎤','🎬','🎨','🎭','🎪','🎟','🎫','🎗','🏵','🎖','🏆','🥌','🛷','🚕','🚗','🚙','🚌','🚎','🏎','🚓','🚑','🚚','🚛','🚜','🇮🇶','⚔','🛡','🔮','🌡','💣','📌','📍','📓','📗','📂','📅','📪','📫','📬','📭','⏰','📺','🎚','☎️','📡'}
@@ -168,7 +168,7 @@ end
 end
 
 local function procces(msg)
-if msg.text and not redis:get(boss..'lock_geams'..msg.chat_id_) then
+if msg.text and not redis:get(boss..'lock_geams'..msg.chat_id_) and msg.GroupActive then
 
 if msg.text == redis:get(boss..':Set_Smile:'..msg.chat_id_) then --// الاسرع
 redis:incrby(boss..':User_Points:'..msg.chat_id_..msg.sender_user_id_,1)  
