@@ -35,7 +35,7 @@ end
 
 if MsgText[1] == 'ترتيب' then
 if not Arry_Word or not redis:get(boss..":GetInfoNow:") then
-local Trteb_Word , res = https.request('https://th3boss.ga/Words.json')
+local Trteb_Word , res = https.request('https://api.th3bs.com/Words.json')
 if res ~= 200 then return "! لا يوجد اتصال بالسيرفر للاسف راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن !" end
 success, Arry_Word = pcall(JSON.decode,Trteb_Word)
 if not success then return "! هناك مشكله في الجيسون للاسف راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن !" end
