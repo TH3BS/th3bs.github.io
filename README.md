@@ -1,6 +1,6 @@
-# th3bs.io
+#     Th3Boss.com
 
 
-## Soon Open WebSite For Plugins ##
+##  Open WebSite For Plugins ##
 
-Files For Source Th3Boss v2.3 
+Files For Source Th3Boss v3.0
