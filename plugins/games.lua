@@ -1,25 +1,42 @@
 --[[
-الالعاب ل سورس الزعيم
---]]
+  #    ▀█████████▄   ▄██████▄     ▄████████    ▄████████
+  #      ███    ███ ███    ███   ███    ███   ███    ███
+  #      ███    ███ ███    ███   ███    █▀    ███    █▀
+  #     ▄███▄▄▄██▀  ███    ███   ███          ███
+  #    ▀▀███▀▀▀██▄  ███    ███ ▀███████████ ▀███████████ ¦ Dev : @TH3BOSS
+  #      ███    ██▄ ███    ███          ███          ███ ¦ Dev : @OMMMM
+  #      ███    ███ ███    ███    ▄█    ███    ▄█    ███
+  #    ▄█████████▀   ▀██████▀   ▄████████▀   ▄████████▀  ¦ Source TH3BOSS BY @TH3BS
+  #---------------------------------------------------------------------
+  ]]
+
 local function games(msg,MsgText)
     if msg.type ~= "pv" then
     if MsgText[1] == "تفعيل" and MsgText[2] == "الالعاب" or MsgText[2] == "اللعبه" or MsgText[2] == "اللعبة" then
     if not msg.Admin then return "📛*¦* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
+    GetUserID(msg.sender_user_id_,function(arg,data)
+        msg = arg.msg 
+        local NameUser   = Hyper_Link_Name(data)
     if not redis:get(boss..'lock_geams'..msg.chat_id_) then 
-    return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* الالعاب بالتاكيد تم تفعيلها\n✓" 
+        return sendMsg(msg.chat_id_,msg.id_,"🔓¦ تم بالتأكيد تفعيل الالعاب    \n📮¦ بواسطه 「 "..NameUser.." 」 \n✓",40,utf8.len(msg.TheRankCmd)) 
     else 
     redis:del(boss..'lock_geams'..msg.chat_id_) 
-    return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* تم تفعيل الالعاب \n✓" 
-    end 
+    return sendMsg(msg.chat_id_,msg.id_,"🔓¦ تم تفعيل الالعاب بنجاح   \n📮¦ بواسطه 「 "..NameUser.." 」 \n✓",40,utf8.len(msg.TheRankCmd)) 
+end 
+end,{msg=msg})
     end
     if MsgText[1] == "تعطيل" and MsgText[2] == "الالعاب" or MsgText[2] == "اللعبه" or MsgText[2] == "اللعبة" then
     if not msg.Admin then return "📛*¦* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
+    GetUserID(msg.sender_user_id_,function(arg,data)
+        msg = arg.msg 
+        local NameUser   = Hyper_Link_Name(data)
     if redis:get(boss..'lock_geams'..msg.chat_id_) then 
-    return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* الالعاب بالتأكيد معطله\n✓" 
+        return sendMsg(msg.chat_id_,msg.id_,"🔒¦ تم بالتأكيد تعطيل الالعاب    \n📮¦ بواسطه 「 "..NameUser.." 」 \n✓",40,utf8.len(msg.TheRankCmd)) 
     else
     redis:set(boss..'lock_geams'..msg.chat_id_,true)  
-    return "🙋🏼‍♂️*¦* أهلا عزيزي "..msg.TheRankCmd.."\n📡*¦* تم تعطيل الالعاب\n✓" 
-    end   
+    return sendMsg(msg.chat_id_,msg.id_,"🔒¦ تم تعطيل الالعاب بنجاح   \n📮¦ بواسطه 「 "..NameUser.." 」 \n✓",40,utf8.len(msg.TheRankCmd)) 
+end  
+end,{msg=msg}) 
     end
     if MsgText[1] == "اضف رسائل" and msg.reply_to_message_id_ == 0 then       
     if not msg.Creator then 
