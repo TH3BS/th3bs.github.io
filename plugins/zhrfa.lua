@@ -2,8 +2,8 @@
 local function Zhrfa(msg,MsgText)
 if msg.type ~= "pv" then
 if MsgText[1] == "زخرفه" then
-redis:setex(boss..":ZhrfNow:"..msg.sender_user_id_..msg.chat_id_,500,true)
-sendMsg(msg.chat_id_,msg.id_,"📑| حسننا , الان يمكنك ارسال الاسم 💯")    
+redis:setex(boss..":ZhrfNow:"..msg.sender_id.user_id..msg.chat_id,500,true)
+sendMsg(msg.chat_id,msg.id,"📑| حسننا , الان يمكنك ارسال الاسم 💯")    
 return false
 end
 end
@@ -11,13 +11,13 @@ end
 
 local function TextRes(msg)
 
-if msg.text and msg.type ~= "pv" and redis:get(boss..":ZhrfNow:"..msg.sender_user_id_..msg.chat_id_) then
-redis:del(boss..":ZhrfNow:"..msg.sender_user_id_..msg.chat_id_)
+if msg.text and msg.type ~= "pv" and redis:get(boss..":ZhrfNow:"..msg.sender_id.user_id..msg.chat_id) then
+redis:del(boss..":ZhrfNow:"..msg.sender_id.user_id..msg.chat_id)
 if utf8.len(msg.text) > 20 then
-sendMsg(msg.chat_id_,msg.id_,"📛| لا يمكنك زخرفه اكثر من 20 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
+sendMsg(msg.chat_id,msg.id,"📛| لا يمكنك زخرفه اكثر من 20 حرف \n📑| ارسل امر زخرفه وحاول مجددا بحروف اقل")    
 return false
 elseif msg.text:match("\n") then
-sendMsg(msg.chat_id_,msg.id_,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
+sendMsg(msg.chat_id,msg.id,"📛| لا يمكن زخرفه نص يحتوي على اكثر من سطر .")
 return false
 end
 local EmojeS = {
@@ -893,7 +893,7 @@ local Text_Zhrfa = "1- `"..Zhrf..EmojeS[math.random(#EmojeS)]
 .."`\n8- `"..Zhrf8..Emoje[math.random(#Emoje)]
 .."`\n9- `"..Zhrf9..Emoje[math.random(#Emoje)]
 Text_Zhrfa = Text_Zhrfa.."`\n\n📑| اضغط ع الاسم ليتم النسخ \n✓"
-sendMsg(msg.chat_id_,msg.id_,Text_Zhrfa)
+sendMsg(msg.chat_id,msg.id,Text_Zhrfa)
 return false
 end
 
