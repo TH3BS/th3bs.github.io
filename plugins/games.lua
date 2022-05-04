@@ -558,7 +558,7 @@ end
 
 if MsgText[1] == 'ترتيب' then
 if not Arry_Word or not redis:get(boss..":GetInfoNow:") then
-local Trteb_Word , res = https.request('https://api.th3boss.com/Words.json')
+local Trteb_Word , res = https.request('https://th3boss.info/Words.json')
 if res ~= 200 then return "! لا يوجد اتصال بالسيرفر للاسف راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن !" end
 success, Arry_Word = pcall(JSON.decode,Trteb_Word)
 if not success then return "! هناك مشكله في الجيسون للاسف راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن !" end
@@ -766,9 +766,8 @@ elseif #list == 0 then
 return "📛| عذرا لم تقوم باضافه اي لاعب .؟!" 
 end 
 local UserName = list[math.random(#list)]
-GetUserName(UserName,function(arg,data)
-redis:incrby(boss..':User_Points:'..msg.chat_id..data.id_,5)
-end,nil)
+local UserId_Info = LuaTele.searchPublicChat(UserName)
+if UserId_Info.id then redis:incrby(boss..':User_Points:'..msg.chat_id..UserId_Info.id,5) end
 redis:del(boss..':List_Rolet:'..msg.chat_id) 
 redis:del(boss..":Witting_StartGame:"..msg.chat_id..msg.sender_id.user_id)
 return '📑¦ تم اختيار الشخص الاتي\n🌟¦ صاحب الحظ {['..UserName..']}\n💰¦ ربحت معنا 5 نقاط' 
