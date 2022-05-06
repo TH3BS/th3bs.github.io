@@ -2,17 +2,7 @@
 local luatele_function, function_core, update_functions, luatele_timer = {}, {}, {}, {}
 local luatele = {
 get_update = true,
-logo = [[
-▀█████████▄   ▄██████▄     ▄████████    ▄████████
-███    ███ ███    ███   ███    ███   ███    ███
-███    ███ ███    ███   ███    █▀    ███    █▀
-▄███▄▄▄██▀  ███    ███   ███          ███
-▀▀███▀▀▀██▄  ███    ███ ▀███████████ ▀███████████ ¦ Dev : @blcon
-███    ██▄ ███    ███          ███          ███ ¦ Dev : @VeerBot
-███    ███ ███    ███    ▄█    ███    ▄█    ███
-▄█████████▀   ▀██████▀   ▄████████▀   ▄████████▀  ¦ Source VeerSource
----------------------------------------------------------------------
-]],
+logo = [[]],
 luatele_helper = {
 ['editInlineMessageText'] = ' function > LuaTele.editInlineMessageText(inline_message_id, input_message_content, reply_markup)',
 ['match'] = ' function > LuaTele.match(table)[value]',
