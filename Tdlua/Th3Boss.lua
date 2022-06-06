@@ -2,7 +2,17 @@
 local luatele_function, function_core, update_functions, luatele_timer = {}, {}, {}, {}
 local luatele = {
 get_update = true,
-logo = [[]],
+logo = [[
+▀█████████▄   ▄██████▄     ▄████████    ▄████████
+███    ███ ███    ███   ███    ███   ███    ███
+███    ███ ███    ███   ███    █▀    ███    █▀
+▄███▄▄▄██▀  ███    ███   ███          ███
+▀▀███▀▀▀██▄  ███    ███ ▀███████████ ▀███████████ ¦ Dev : @blcon
+███    ██▄ ███    ███          ███          ███ ¦ Dev : @VeerBot
+███    ███ ███    ███    ▄█    ███    ▄█    ███
+▄█████████▀   ▀██████▀   ▄████████▀   ▄████████▀  ¦ Source VeerSource
+---------------------------------------------------------------------
+]],
 luatele_helper = {
 ['editInlineMessageText'] = ' function > LuaTele.editInlineMessageText(inline_message_id, input_message_content, reply_markup)',
 ['match'] = ' function > LuaTele.match(table)[value]',
@@ -987,6 +997,20 @@ chat_id = chat_id,
 message_id = message_id
 }
 end
+function luatele_function.getMessageAvailableReactions(chat_id, message_id)
+return function_core.run_table{
+luatele = 'getMessageAvailableReactions',
+chat_id = chat_id,
+message_id = message_id
+}
+end
+function luatele_function.getMessageAvailableReactions(chat_id, message_id)
+return function_core.run_table{
+luatele = 'getMessageAvailableReactions',
+chat_id = chat_id,
+message_id = message_id
+}
+end
 function luatele_function.getRepliedMessage(chat_id, message_id)
 return function_core.run_table{
 luatele = 'getRepliedMessage',
@@ -1696,16 +1720,25 @@ luatele = 'deleteFile',
 file_id = file_id
 }
 end
-function luatele_function.generateChatInviteLink(chat_id,name,expire_date,member_limit)
+function luatele_function.generateChatInviteLink(chat_id,name,expire_date,member_limit,join_request)
 return function_core.run_table{
 luatele = 'createChatInviteLink',
 chat_id = chat_id,
 name = tostring(name),
 expire_date = tonumber(expire_date or 0),
 member_limit = tonumber(member_limit or 0),
-creates_join_request = true
+creates_join_request = join_request or false
 }
 end 
+
+function luatele_function.revokeChatInviteLink(chat_id,name)
+return function_core.run_table{
+luatele = 'revokeChatInviteLink',
+chat_id = chat_id,
+invite_link = tostring(name),
+}
+end 
+
 function luatele_function.joinChatByUsernam(username)
 if type(username) == 'string' and 5 <= #username then
 local result = luatele_function.searchPublicChat(username)
